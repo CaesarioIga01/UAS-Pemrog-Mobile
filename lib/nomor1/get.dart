@@ -1,19 +1,17 @@
 import 'dart:convert';
 
-class Get1 {
+class Ambil {
   String id;
   String name;
   String job;
   int age;
 
-  Get1({this.id, this.name, this.job, this.age});
+  Ambil({this.id, this.name, this.job, this.age});
 
-  factory Get1.fromJson(Map<String, dynamic> map) {
-    return Get1(
+  factory Ambil.fromJson(Map<String, dynamic> map) {
+    return Ambil(
         id: map["_id"], name: map["name"], job: map["job"], age: map["age"]);
   }
-
-  String get $id => null;
 
   Map<String, dynamic> toJson() {
     return {"_id": id, "name": name, "job": job, "age": age};
@@ -21,16 +19,16 @@ class Get1 {
 
   @override
   String toString() {
-    return 'Get1{_id: $id, name: $name, job: $job, age: $age}';
+    return 'Profile{_id: $id, name: $name, job: $job, age: $age}';
   }
 }
 
-List<Get1> get1FromJson(String jsonData) {
+List<Ambil> profileFromJson(String jsonData) {
   final data = json.decode(jsonData);
-  return List<Get1>.from(data.map((item) => Get1.fromJson(item)));
+  return List<Ambil>.from(data.map((item) => Ambil.fromJson(item)));
 }
 
-String get1ToJson(Get1 data) {
+String profileToJson(Ambil data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }

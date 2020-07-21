@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oll11/Nomor2&3/cart.dart';
 import 'package:oll11/Nomor2&3/money.dart';
+import 'package:oll11/homepage/halaman_awal.dart';
 import 'package:provider/provider.dart';
 
 class MultiPage extends StatefulWidget {
@@ -58,7 +59,7 @@ class _MultiPageState extends State<MultiPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Balance"),
+                    Text("Jumlah Uang"),
                     Container(
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -113,6 +114,24 @@ class _MultiPageState extends State<MultiPage> {
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black, width: 2)),
+                ),
+                SizedBox(height: 35.0),
+                RaisedButton(
+                  child: Text(
+                    "Kembali",
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0),
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => BerandaPage()));
+                  },
                 ),
               ],
             ),

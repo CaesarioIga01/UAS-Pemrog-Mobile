@@ -1,23 +1,35 @@
-import 'package:bloc/bloc.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-enum ColorEvent { to_grey, to_limeAccent }
+enum ColorEvent { to_greenAcccent, to_redAccent }
 
-class ColorBloc extends Bloc<ColorEvent, Color> {
-  Color _color = Colors.grey;
+class ColorBloc {
+  Color _color = Colors.greenAccent;
 
-  @override
-  Color get initialState => Colors.grey;
+  StreamController<ColorEvent> _eventController =
+      StreamController<ColorEvent>();
+  StreamSink<ColorEvent> get eventSink => _eventController.sink;
 
-  get eventSink => null;
+  StreamController<Color> _stateController = StreamController<Color>();
+  StreamSink<Color> get _stateSink => _stateController.sink;
+  Stream<Color> get stateStream => _stateController.stream;
 
-  get stateStream => null;
+  void _mapEventToState(ColorEvent colorEvent) {
+    if (colorEvent == ColorEvent.to_greenAcccent)
+      _color = Colors.greenAccent;
+    else
+      _color = Colors.redAccent;
 
-  @override
-  Stream<Color> mapEventToState(ColorEvent event) async* {
-    _color = (event == ColorEvent.to_grey) ? Colors.grey : Colors.limeAccent;
-    yield _color;
+    _stateSink.add(_color);
   }
 
-  void dispose() {}
+  ColorBloc() {
+    _eventController.stream.listen(_mapEventToState);
+  }
+
+  void dispose() {
+    _eventController.close();
+    _stateController.close();
+  }
 }
